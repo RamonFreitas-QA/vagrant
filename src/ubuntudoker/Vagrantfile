@@ -1,0 +1,55 @@
+# vi: set ft=ruby :
+
+# All Vagrant configuration is done below. The "2" in Vagrant.configure
+# configures the configuration version (we support older styles for
+# backwards compatibility). Please don't change it unless you know what
+# you're doing.
+Vagrant.configure("2") do |config|
+
+  #box image
+  config.vm.box = "ubuntu/bionic64"
+    
+  # require plugin https://github.com/leighmcculloch/vagrant-docker-compose
+  config.vagrant.plugins = "vagrant-docker-compose"
+
+  # install docker and docker-compose
+  config.vm.provision :docker
+  config.vm.provision :docker_compose
+  
+  #vm name
+    config.vm.define "docker" do |docker|
+  end
+
+  #hostname
+  config.vm.hostname = "docker" 
+
+  #virtutalmachine resources
+  config.vm.provision "shell", inline: <<-SHELL
+    #.net core rutime install
+    sudo apt-get update; \
+    sudo apt-get install -y apt-transport-https && \
+    sudo apt-get update && \
+    sudo apt-get install -y aspnetcore-runtime-5.0
+
+    #.net core rutime install
+    sudo apt-get update; \
+    sudo apt-get install -y apt-transport-https && \
+    sudo apt-get update && \
+    sudo apt-get install -y dotnet-sdk-5.0 
+    
+    apt-get install -y curl vim
+
+    apt-get install -y curl nano
+
+    apt-get install git-all
+       
+    sudo apt-get update; \
+    sudo apt-get install -y apt-transport-https && \
+    sudo apt-get update && \
+    sudo apt-get install -y dotnet-sdk-5.0
+
+    cd /home
+    mmkdir /home/ramonfreitas
+  SHELL
+end 
+
