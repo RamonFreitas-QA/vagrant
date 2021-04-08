@@ -20,7 +20,7 @@ Vagrant.configure("2") do |config|
   config.vm.provision "shell", inline: <<-SHELL
     #.net core rutime install
     sudo apt-get update &&\
-    sudo apt-get install -y apt-transport-https && \
+    sudo apt-get install apt-transport-https && \
     sudo apt-get update && \
     sudo apt-get install -y aspnetcore-runtime-5.0 &&\
 
@@ -30,11 +30,11 @@ Vagrant.configure("2") do |config|
     sudo apt-get update && &&\
     sudo apt-get install -y dotnet-sdk-5.0 &&\
     
-    apt-get install -y curl vim &&\
+    sudo apt-get install -y curl vim &&\
 
-    apt-get install -y curl nano &&\
+    sudo apt-get install curl nano -y &&\
 
-    apt-get install git-all &&\
+    sudo apt-get install git-all -y&&\
        
     sudo apt-get update && \
     sudo apt-get install -y apt-transport-https && \
